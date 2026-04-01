@@ -258,6 +258,66 @@ def save_needs_review(reviews):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+def send_slack_notification(num_reviews):
+    """Send Slack DM to Ed when there are reviews to check"""
+    if num_reviews == 0:
+        return
+    
+    # Ed's Slack user ID (we'll need to look this up or use email)
+    # For now, we'll post to a channel or use webhook
+    
+    message = {
+        "text": f"📋 *Marro Review Alert*\n\n{num_reviews} new review(s) need manual categorization.\n\n👉 <https://edhunt-bnb.github.io/marro-reviews/Ed_to_check_reviews.html|Click here to review>"
+    }
+    
+    try:
+        # Try to send DM to Ed using his email
+        # First, look up user by email
+        response = requests.get(
+            "https://slack.com/api/users.lookupByEmail",
+            headers={"Authorization": f"Bearer {SLACK_BOT_TOKEN}"},
+            params={"email": "edwardhunt@butternutbox.com"}
+        )
+        
+        data = response.json()
+        if data.get("ok"):
+            user_id = data["user"]["id"]
+            
+            # Open a DM channel
+            dm_response = requests.post(
+                "https://slack.com/api/conversations.open",
+                headers={"Authorization": f"Bearer {SLACK_BOT_TOKEN}"},
+                json={"users": user_id}
+            )
+            
+            dm_data = dm_response.json()
+            if dm_data.get("ok"):
+                channel_id = dm_data["channel"]["id"]
+                
+                # Send the message
+                msg_response = requests.post(
+                    "https://slack.com/api/chat.postMessage",
+                    headers={"Authorization": f"Bearer {SLACK_BOT_TOKEN}"},
+                    json={
+                        "channel": channel_id,
+                        "text": message["text"],
+                        "unfurl_links": False
+                    }
+                )
+                
+                if msg_response.json().get("ok"):
+                    print(f"  📨 Slack notification sent to Ed")
+                else:
+                    print(f"  ⚠️ Failed to send Slack message: {msg_response.json().get('error')}")
+            else:
+                print(f"  ⚠️ Failed to open DM: {dm_data.get('error')}")
+        else:
+            print(f"  ⚠️ Could not find Slack user: {data.get('error')}")
+    
+    except Exception as e:
+        print(f"  ⚠️ Slack notification error: {e}")
+
+
 def generate_html(reviews_by_category):
     """Generate the HTML landing page with tabs"""
     
@@ -449,15 +509,6 @@ def generate_html(reviews_by_category):
             font-weight: 500;
         }
         
-        .summary-badge {
-            background: var(--marro-pink);
-            color: var(--marro-dark-maroon);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            margin-bottom: 12px;
-            font-style: italic;
-        }
         
         @media (max-width: 768px) {
             .header { padding: 30px 20px; }
@@ -523,7 +574,6 @@ def generate_html(reviews_by_category):
             html += f'''                <div class="review-card">
                     <div class="review-stars">★★★★★</div>
                     {f'<div class="review-title">{title}</div>' if title else ''}
-                    {f'<div class="summary-badge">💡 {summary}</div>' if summary else ''}
                     <div class="review-text">{text}</div>
                     <div class="review-meta">
                         <span class="review-author">{reviewer if reviewer else "Verified Buyer"}</span>
@@ -897,6 +947,10 @@ def main():
             print(f"⚠️ Added {len(uncertain_reviews)} reviews to manual queue")
             print(f"Total categorized: {len(existing_reviews)}")
             print(f"Total needing review: {len(needs_review)}")
+            
+            # Send Slack notification if there are new reviews to check
+            if len(uncertain_reviews) > 0:
+                send_slack_notification(len(uncertain_reviews))
         else:
             print("No new messages found.")
     
