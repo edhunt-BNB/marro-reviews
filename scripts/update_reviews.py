@@ -17,7 +17,9 @@ SLACK_CHANNEL_NAME = "marro-trustpilot"
 
 # Files
 REVIEWS_JSON = "reviews_data.json"
+NEEDS_REVIEW_JSON = "needs_review.json"
 OUTPUT_HTML = "index.html"
+NEEDS_REVIEW_HTML = "Ed_to_check_reviews.html"
 
 # 5-Star Review Categories
 CATEGORIES_5STAR = [
@@ -131,36 +133,59 @@ def parse_review_from_message(message):
 
 
 def categorize_5star_review(review_text, groq_client):
-    """Categorize 5-star review into specific categories"""
+    """Categorize 5-star review into ONE specific category with confidence check"""
     if not review_text or len(review_text) < 10:
-        return [], ""
+        return None, False  # category, is_confident
     
-    prompt = f"""Analyze this 5-star Trustpilot review for Marro (a cat food company) and categorize it.
+    prompt = f"""You are categorizing 5-star Trustpilot reviews for Marro (a cat food company).
 
-CATEGORIES (select 1-2 that best fit):
-1. "High Quality Ingredients/Product" - mentions quality, ingredients, freshness, real meat, etc.
-2. "Customer Service" - mentions helpful staff, support, communication, responsiveness
-3. "Fussy Cats" - mentions picky/fussy cat that loves the food
-4. "Took a While But Now Love It" - cat was hesitant at first but eventually loved it
-5. "Subscription Benefits" - mentions convenience, delivery, subscription flexibility, easy to manage
-6. "Changed My Cat's Life / Health Benefits" - mentions health improvements, coat, energy, digestion, weight
+STRICT RULES:
+- Select ONLY ONE category that BEST fits the review
+- Only select a category if you are HIGHLY CONFIDENT (90%+ sure)
+- If the review could fit multiple categories equally, or doesn't clearly fit any, set confidence to "low"
+
+CATEGORIES (pick exactly ONE):
+
+1. "High Quality Ingredients/Product" 
+   - Review MUST explicitly mention: quality, ingredients, freshness, real meat, natural, healthy food
+   - NOT just "my cat loves it" - needs specific quality mentions
+
+2. "Customer Service" 
+   - Review MUST mention: staff, support team, advisor, communication, help received, response
+   - The PRIMARY focus of the review is about service received
+
+3. "Fussy Cats" 
+   - Review MUST explicitly say the cat is: picky, fussy, difficult eater, won't eat other food, refuses food
+   - The cat's pickiness must be the MAIN POINT of the review
+
+4. "Took a While But Now Love It" 
+   - Review MUST mention: took time, hesitant at first, didn't like it initially, gradual transition, eventually loved it
+   - There must be a BEFORE (didn't like) and AFTER (now loves) story
+
+5. "Subscription Benefits" 
+   - Review MUST mention: delivery, subscription, convenience, easy to order, flexible, doorstep
+   - The PRIMARY focus is about the subscription/delivery service
+
+6. "Changed My Cat's Life / Health Benefits" 
+   - Review MUST mention: health improvement, better coat, more energy, digestion, weight loss/gain, vet, medical
+   - There must be a SPECIFIC health benefit mentioned
 
 REVIEW:
 "{review_text}"
 
-Respond in JSON:
-{{"categories": ["Category 1"], "summary": "One sentence summary focusing on why they gave 5 stars"}}
+Respond in JSON ONLY:
+{{"category": "Category Name or null", "confidence": "high" or "low", "reason": "brief reason for choice"}}
 """
     
     try:
         response = groq_client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
-                {"role": "system", "content": "You are a review analyzer. Always respond with valid JSON only."},
+                {"role": "system", "content": "You are a strict review categorizer. Only categorize if highly confident. Respond with valid JSON only."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.3,
-            max_tokens=200
+            temperature=0.1,  # Lower temperature for more consistent results
+            max_tokens=150
         )
         
         result = response.choices[0].message.content
@@ -176,11 +201,20 @@ Respond in JSON:
             result = result[start:end]
         
         data = json.loads(result)
-        return data.get("categories", []), data.get("summary", "")
+        category = data.get("category")
+        confidence = data.get("confidence", "low")
+        reason = data.get("reason", "")
+        
+        # Only return category if confidence is high and category is valid
+        if category and confidence == "high" and category in CATEGORIES_5STAR:
+            return category, True
+        else:
+            print(f"    Low confidence or invalid: {category} ({confidence}) - {reason}")
+            return category, False
     
     except Exception as e:
         print(f"    AI error: {e}")
-        return [], ""
+        return None, False
 
 
 def load_existing_reviews():
@@ -192,6 +226,15 @@ def load_existing_reviews():
     return [], "0"
 
 
+def load_needs_review():
+    """Load reviews that need manual categorization"""
+    if os.path.exists(NEEDS_REVIEW_JSON):
+        with open(NEEDS_REVIEW_JSON, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data.get("reviews", [])
+    return []
+
+
 def save_reviews(reviews, last_timestamp):
     """Save reviews to JSON file"""
     data = {
@@ -201,6 +244,17 @@ def save_reviews(reviews, last_timestamp):
         "reviews": reviews
     }
     with open(REVIEWS_JSON, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+def save_needs_review(reviews):
+    """Save reviews that need manual categorization"""
+    data = {
+        "last_updated": datetime.now().isoformat(),
+        "total_reviews": len(reviews),
+        "reviews": reviews
+    }
+    with open(NEEDS_REVIEW_JSON, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
@@ -501,6 +555,250 @@ def generate_html(reviews_by_category):
     return html
 
 
+def generate_needs_review_html(reviews):
+    """Generate the HTML page for manual review categorization"""
+    
+    html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ed to Check - Marro Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --marro-maroon: #80020F;
+            --marro-dark-maroon: #3A070d;
+            --marro-pink: #E2C5C5;
+            --marro-mustard: #C88131;
+            --marro-cream: #FDF8F3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--marro-cream);
+            color: var(--marro-dark-maroon);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--marro-mustard), #a66a28);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; }
+        
+        .review-count {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--marro-dark-maroon);
+        }
+        
+        .reviews-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .review-card.categorized {
+            opacity: 0.5;
+            border: 3px solid #4CAF50;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .review-stars { color: var(--marro-mustard); font-size: 20px; }
+        .review-date { color: #888; font-size: 13px; }
+        .review-title { font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+        .review-text { color: #555; line-height: 1.6; margin-bottom: 15px; }
+        .review-author { color: #888; font-size: 13px; font-style: italic; }
+        
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ddd;
+        }
+        
+        .category-btn {
+            padding: 10px 16px;
+            border: 2px solid var(--marro-maroon);
+            background: white;
+            color: var(--marro-dark-maroon);
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .category-btn:hover {
+            background: var(--marro-maroon);
+            color: white;
+        }
+        
+        .category-btn.selected {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+        
+        .success-msg {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .no-reviews {
+            text-align: center;
+            padding: 60px;
+            color: #888;
+        }
+        
+        .no-reviews h2 { color: #4CAF50; margin-bottom: 10px; }
+        
+        .instructions {
+            background: var(--marro-pink);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .instructions p { margin-bottom: 10px; }
+        .instructions strong { color: var(--marro-maroon); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📋 Ed to Check - Review Queue</h1>
+        <p>Reviews that need manual categorization</p>
+        <div class="review-count">''' + str(len(reviews)) + ''' reviews to check</div>
+    </div>
+    
+    <div class="reviews-container">
+'''
+    
+    if not reviews:
+        html += '''        <div class="no-reviews">
+            <h2>✅ All caught up!</h2>
+            <p>No reviews need manual categorization.</p>
+        </div>
+'''
+    else:
+        html += '''        <div class="instructions">
+            <p><strong>Instructions:</strong> Click a category button to assign the review.</p>
+            <p>The review will be moved to the main page automatically.</p>
+        </div>
+'''
+        for review in reviews:
+            title = review.get("title", "").replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+            text = review.get("review_text", "").replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+            reviewer = review.get("reviewer_name", "").replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+            date = review.get("date", "")
+            timestamp = review.get("timestamp", "")
+            ai_suggestion = review.get("ai_suggestion", "")
+            
+            html += f'''        <div class="review-card" id="review-{timestamp}">
+            <div class="review-header">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-date">{date}</div>
+            </div>
+            {f'<div class="review-title">{title}</div>' if title else ''}
+            <div class="review-text">{text}</div>
+            <div class="review-author">— {reviewer if reviewer else "Anonymous"}</div>
+            {f'<div style="margin-top:10px;padding:8px 12px;background:#fff3cd;border-radius:8px;font-size:12px;">🤖 AI suggested: <strong>{ai_suggestion}</strong> (low confidence)</div>' if ai_suggestion else ''}
+            <div class="category-buttons">
+'''
+            for cat in CATEGORIES_5STAR:
+                cat_id = cat.replace(" ", "_").replace("/", "_").replace("'", "")
+                html += f'''                <button class="category-btn" onclick="assignCategory('{timestamp}', '{cat}')">{cat}</button>
+'''
+            
+            html += f'''            </div>
+            <div class="success-msg" id="success-{timestamp}">✅ Assigned! Refresh to see updated list.</div>
+        </div>
+'''
+    
+    html += '''    </div>
+    
+    <script>
+        function assignCategory(timestamp, category) {
+            // Store in localStorage for now (manual process)
+            const assignments = JSON.parse(localStorage.getItem('marro_assignments') || '{}');
+            assignments[timestamp] = category;
+            localStorage.setItem('marro_assignments', JSON.stringify(assignments));
+            
+            // Visual feedback
+            const card = document.getElementById('review-' + timestamp);
+            card.classList.add('categorized');
+            document.getElementById('success-' + timestamp).style.display = 'block';
+            
+            // Update all buttons in this card
+            card.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.textContent === category) {
+                    btn.classList.add('selected');
+                }
+            });
+            
+            console.log('Assigned:', timestamp, '->', category);
+            console.log('All assignments:', assignments);
+            
+            // Show instructions for manual sync
+            alert('Category assigned: ' + category + '\\n\\nTo sync to the main page, run the update script or trigger the GitHub Action.');
+        }
+        
+        // On page load, check for any stored assignments and mark them
+        document.addEventListener('DOMContentLoaded', () => {
+            const assignments = JSON.parse(localStorage.getItem('marro_assignments') || '{}');
+            Object.keys(assignments).forEach(timestamp => {
+                const card = document.getElementById('review-' + timestamp);
+                if (card) {
+                    card.classList.add('categorized');
+                    document.getElementById('success-' + timestamp).style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+'''
+    
+    return html
+
+
 def main():
     print("=" * 60)
     print("MARRO 5-STAR REVIEW UPDATER")
@@ -511,9 +809,12 @@ def main():
         print("ERROR: Missing environment variables (SLACK_BOT_TOKEN or GROQ_API_KEY)")
         return
     
-    # Load existing reviews
+    # Load existing data
     existing_reviews, last_timestamp = load_existing_reviews()
-    print(f"\nExisting reviews: {len(existing_reviews)}")
+    needs_review = load_needs_review()
+    
+    print(f"\nExisting categorized reviews: {len(existing_reviews)}")
+    print(f"Reviews needing manual check: {len(needs_review)}")
     print(f"Last timestamp: {last_timestamp}")
     
     # Get channel ID
@@ -530,7 +831,6 @@ def main():
             print(f"\nProcessing {len(new_messages)} new messages...")
             
             groq_client = Groq(api_key=GROQ_API_KEY)
-            new_reviews = []
             new_5star = []
             latest_ts = last_timestamp
             
@@ -549,50 +849,84 @@ def main():
             
             print(f"Found {len(new_5star)} new 5-star reviews")
             
-            # Categorize new 5-star reviews
-            for i, review in enumerate(new_5star):
-                print(f"  [{i+1}/{len(new_5star)}] Categorizing: {review['date']}...")
-                categories, summary = categorize_5star_review(review["review_text"], groq_client)
-                review["categories"] = categories
-                review["summary"] = summary
+            # Categorize new 5-star reviews with confidence check
+            confident_reviews = []
+            uncertain_reviews = []
             
-            # Merge with existing
             existing_timestamps = {r["timestamp"] for r in existing_reviews}
-            for review in new_5star:
-                if review["timestamp"] not in existing_timestamps:
-                    existing_reviews.append(review)
+            needs_review_timestamps = {r["timestamp"] for r in needs_review}
+            
+            for i, review in enumerate(new_5star):
+                # Skip if already processed
+                if review["timestamp"] in existing_timestamps or review["timestamp"] in needs_review_timestamps:
+                    continue
+                
+                print(f"  [{i+1}/{len(new_5star)}] Categorizing: {review['date']} - {review.get('title', '')[:30]}...")
+                category, is_confident = categorize_5star_review(review["review_text"], groq_client)
+                
+                if is_confident and category:
+                    # High confidence - add to main list with single category
+                    review["category"] = category
+                    review["categories"] = [category]  # Keep for backward compatibility
+                    confident_reviews.append(review)
+                    print(f"    ✅ Confident: {category}")
+                else:
+                    # Low confidence - add to manual review queue
+                    review["ai_suggestion"] = category  # Store AI's guess for reference
+                    review["categories"] = []
+                    uncertain_reviews.append(review)
+                    print(f"    ⚠️ Needs manual review")
+            
+            # Add confident reviews to main list
+            for review in confident_reviews:
+                existing_reviews.append(review)
+            
+            # Add uncertain reviews to needs_review list
+            for review in uncertain_reviews:
+                needs_review.append(review)
             
             # Sort by date (newest first)
             existing_reviews.sort(key=lambda x: x.get("timestamp", "0"), reverse=True)
+            needs_review.sort(key=lambda x: x.get("timestamp", "0"), reverse=True)
             
-            # Save updated reviews
+            # Save updated data
             save_reviews(existing_reviews, latest_ts)
-            print(f"\nTotal reviews now: {len(existing_reviews)}")
+            save_needs_review(needs_review)
+            
+            print(f"\n✅ Added {len(confident_reviews)} confident reviews to main list")
+            print(f"⚠️ Added {len(uncertain_reviews)} reviews to manual queue")
+            print(f"Total categorized: {len(existing_reviews)}")
+            print(f"Total needing review: {len(needs_review)}")
         else:
             print("No new messages found.")
     
-    # Group by category
+    # Group by category (single category per review now)
     reviews_by_category = {cat: [] for cat in CATEGORIES_5STAR}
     for review in existing_reviews:
-        for cat in review.get("categories", []):
-            if cat in reviews_by_category:
-                reviews_by_category[cat].append(review)
+        cat = review.get("category") or (review.get("categories", [None])[0] if review.get("categories") else None)
+        if cat and cat in reviews_by_category:
+            reviews_by_category[cat].append(review)
     
-    # Generate HTML
-    print("\nGenerating HTML...")
+    # Generate main HTML
+    print("\nGenerating HTML files...")
     html = generate_html(reviews_by_category)
-    
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
+    print(f"  Saved: {OUTPUT_HTML}")
     
-    print(f"Saved: {OUTPUT_HTML}")
+    # Generate needs-review HTML
+    needs_review_html = generate_needs_review_html(needs_review)
+    with open(NEEDS_REVIEW_HTML, "w", encoding="utf-8") as f:
+        f.write(needs_review_html)
+    print(f"  Saved: {NEEDS_REVIEW_HTML}")
     
     # Print summary
     print("\n" + "=" * 60)
-    print("CATEGORY BREAKDOWN")
+    print("CATEGORY BREAKDOWN (Confident Reviews)")
     print("=" * 60)
     for cat, reviews in reviews_by_category.items():
         print(f"  {cat}: {len(reviews)} reviews")
+    print(f"\n  ⚠️ Needs Manual Review: {len(needs_review)} reviews")
     
     print("\n✅ UPDATE COMPLETE!")
 

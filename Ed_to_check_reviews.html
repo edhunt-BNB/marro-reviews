@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ed to Check - Marro Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --marro-maroon: #80020F;
+            --marro-dark-maroon: #3A070d;
+            --marro-pink: #E2C5C5;
+            --marro-mustard: #C88131;
+            --marro-cream: #FDF8F3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--marro-cream);
+            color: var(--marro-dark-maroon);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--marro-mustard), #a66a28);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; }
+        
+        .review-count {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--marro-dark-maroon);
+        }
+        
+        .reviews-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .review-card.categorized {
+            opacity: 0.5;
+            border: 3px solid #4CAF50;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .review-stars { color: var(--marro-mustard); font-size: 20px; }
+        .review-date { color: #888; font-size: 13px; }
+        .review-title { font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+        .review-text { color: #555; line-height: 1.6; margin-bottom: 15px; }
+        .review-author { color: #888; font-size: 13px; font-style: italic; }
+        
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ddd;
+        }
+        
+        .category-btn {
+            padding: 10px 16px;
+            border: 2px solid var(--marro-maroon);
+            background: white;
+            color: var(--marro-dark-maroon);
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .category-btn:hover {
+            background: var(--marro-maroon);
+            color: white;
+        }
+        
+        .category-btn.selected {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+        
+        .success-msg {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .no-reviews {
+            text-align: center;
+            padding: 60px;
+            color: #888;
+        }
+        
+        .no-reviews h2 { color: #4CAF50; margin-bottom: 10px; }
+        
+        .instructions {
+            background: var(--marro-pink);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .instructions p { margin-bottom: 10px; }
+        .instructions strong { color: var(--marro-maroon); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📋 Ed to Check - Review Queue</h1>
+        <p>Reviews that need manual categorization</p>
+        <div class="review-count">0 reviews to check</div>
+    </div>
+    
+    <div class="reviews-container">
+        <div class="no-reviews">
+            <h2>✅ All caught up!</h2>
+            <p>No reviews need manual categorization.</p>
+        </div>
+    </div>
+    
+    <script>
+        function assignCategory(timestamp, category) {
+            // Store in localStorage for now (manual process)
+            const assignments = JSON.parse(localStorage.getItem('marro_assignments') || '{}');
+            assignments[timestamp] = category;
+            localStorage.setItem('marro_assignments', JSON.stringify(assignments));
+            
+            // Visual feedback
+            const card = document.getElementById('review-' + timestamp);
+            card.classList.add('categorized');
+            document.getElementById('success-' + timestamp).style.display = 'block';
+            
+            // Update all buttons in this card
+            card.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.textContent === category) {
+                    btn.classList.add('selected');
+                }
+            });
+            
+            console.log('Assigned:', timestamp, '->', category);
+            console.log('All assignments:', assignments);
+            
+            // Show instructions for manual sync
+            alert('Category assigned: ' + category + '\n\nTo sync to the main page, run the update script or trigger the GitHub Action.');
+        }
+        
+        // On page load, check for any stored assignments and mark them
+        document.addEventListener('DOMContentLoaded', () => {
+            const assignments = JSON.parse(localStorage.getItem('marro_assignments') || '{}');
+            Object.keys(assignments).forEach(timestamp => {
+                const card = document.getElementById('review-' + timestamp);
+                if (card) {
+                    card.classList.add('categorized');
+                    document.getElementById('success-' + timestamp).style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
