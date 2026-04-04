@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-04-03T20:28:57.771872",
-  "last_timestamp": "1775243261.098239",
-  "total_reviews": 2015,
+  "last_updated": "2026-04-04T08:33:44.650341",
+  "last_timestamp": "1775291154.699309",
+  "total_reviews": 2016,
   "reviews": [
+    {
+      "date": "2026-04-04",
+      "timestamp": "1775291154.699309",
+      "reviewer_name": "Eleanor White",
+      "star_rating": 5,
+      "title": "Worth persevering",
+      "review_text": "After a bit of a rocky start my very fussy cats now clean their bowls every time.",
+      "category": "Fussy Cats",
+      "categories": [
+        "Fussy Cats"
+      ]
+    },
     {
       "date": "2026-04-03",
       "timestamp": "1775243261.098239",
