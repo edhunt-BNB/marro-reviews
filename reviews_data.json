@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-05-20T18:11:38.644581",
-  "last_timestamp": "1779298269.507039",
-  "total_reviews": 2158,
+  "last_updated": "2026-05-20T21:46:14.500168",
+  "last_timestamp": "1779309351.318299",
+  "total_reviews": 2159,
   "reviews": [
+    {
+      "date": "2026-05-20",
+      "timestamp": "1779309351.318299",
+      "reviewer_name": "Susan Smith",
+      "star_rating": 5,
+      "title": "I managed to speak to an agent…",
+      "review_text": "I managed to speak to an agent immediately which was very refreshing. My concerns were discussed and resolved in a kind and sensitive manner. The agent had excellent interpersonal skills.",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-05-20",
       "timestamp": "1779298269.507039",
