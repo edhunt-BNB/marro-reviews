@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-05-19T10:57:01.270519",
-  "last_timestamp": "1779187118.718299",
-  "total_reviews": 2156,
+  "last_updated": "2026-05-20T10:44:28.119582",
+  "last_timestamp": "1779268787.177519",
+  "total_reviews": 2157,
   "reviews": [
+    {
+      "date": "2026-05-20",
+      "timestamp": "1779268787.177519",
+      "reviewer_name": "K Gibson",
+      "star_rating": 5,
+      "title": "My cat loves their food and I love…",
+      "review_text": "My cat loves their food and I love their quick replies to my queries",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-05-19",
       "timestamp": "1779187118.718299",
