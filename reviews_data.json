@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-05-24T11:09:45.939684",
-  "last_timestamp": "1779616185.494069",
-  "total_reviews": 2175,
+  "last_updated": "2026-05-24T13:08:35.588461",
+  "last_timestamp": "1779626312.233899",
+  "total_reviews": 2176,
   "reviews": [
+    {
+      "date": "2026-05-24",
+      "timestamp": "1779626312.233899",
+      "reviewer_name": "Richard P.",
+      "star_rating": 5,
+      "title": "From day one.",
+      "review_text": "From day one, the company was asking if Essie was happy with her new food; she loves it. \nAnd have also followed upon two other occasions making sure that she was still happy with her food.",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-05-24",
       "timestamp": "1779616185.494069",
