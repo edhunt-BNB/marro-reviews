@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-05-23T11:04:45.939454",
-  "last_timestamp": "1779530043.530289",
-  "total_reviews": 2171,
+  "last_updated": "2026-05-24T02:37:57.463883",
+  "last_timestamp": "1779580853.941449",
+  "total_reviews": 2173,
   "reviews": [
+    {
+      "date": "2026-05-24",
+      "timestamp": "1779580853.941449",
+      "reviewer_name": "Kirsty Wray",
+      "star_rating": 5,
+      "title": "My kitten was struggling with…",
+      "review_text": "My kitten was struggling with supermarket brands,feeding several times a day only eating tiny amounts.\nWhen her food arrived I gave her half her daily allowance just to see how she got on.\nShe wolfed the lot straight down,even licking her bowl clean!!\nShe loves Marro. She's more active and more affectionate since she's been on it.\nMarro's customer service is very good too. Answering all my questions almost instantly",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
+    {
+      "date": "2026-05-23",
+      "timestamp": "1779578889.295449",
+      "reviewer_name": "Sarah Howlett",
+      "star_rating": 5,
+      "title": "Marro is amazing!",
+      "review_text": "I tried Marro after my cats just always seemed hungry and desperate for our food, even though they never finished their bowls! I  wasn’t sure as I had tried other brands and they had turned their noses up. In the first week I nearly cancelled as they wouldn’t eat it but after a few days they were suddenly eating… and loving every bite! I had great support from the Marro team who advised me on portions and always tried to make it the most economical. A fantastic company and product.",
+      "category": "Took a While But Now Love It",
+      "categories": [
+        "Took a While But Now Love It"
+      ]
+    },
     {
       "date": "2026-05-23",
       "timestamp": "1779503090.907339",
