@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-05-31T02:47:56.933891",
-  "last_timestamp": "1780194058.239179",
-  "total_reviews": 2187,
+  "last_updated": "2026-05-31T13:22:24.541219",
+  "last_timestamp": "1780225823.133259",
+  "total_reviews": 2188,
   "reviews": [
+    {
+      "date": "2026-05-31",
+      "timestamp": "1780225823.133259",
+      "reviewer_name": "Maria Gibbons",
+      "star_rating": 5,
+      "title": "Tiggy loves the food",
+      "review_text": "Tiggy loves the food, was getting very fussy but no problem anymore. One happy cat.",
+      "category": "Fussy Cats",
+      "categories": [
+        "Fussy Cats"
+      ]
+    },
     {
       "date": "2026-05-30",
       "timestamp": "1780161652.679569",
