@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-05-31T20:51:48.733057",
-  "last_timestamp": "1780260452.626179",
-  "total_reviews": 2191,
+  "last_updated": "2026-06-01T02:56:29.396326",
+  "last_timestamp": "1780280094.408409",
+  "total_reviews": 2192,
   "reviews": [
+    {
+      "date": "2026-06-01",
+      "timestamp": "1780280094.408409",
+      "reviewer_name": "K Gibson",
+      "star_rating": 5,
+      "title": "Customer service is excellent any…",
+      "review_text": "Customer service is excellent any questions are answered quickly and efficiently.\n\nFood is worth the cost and Violet loves it and it's gone within seconds of us putting it down so she definitely loves it.",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-05-31",
       "timestamp": "1780260452.626179",
