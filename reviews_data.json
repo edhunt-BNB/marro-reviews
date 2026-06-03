@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-06-03T19:43:11.832419",
-  "last_timestamp": "1780504978.828349",
-  "total_reviews": 2198,
+  "last_updated": "2026-06-03T22:25:25.157036",
+  "last_timestamp": "1780525160.612089",
+  "total_reviews": 2199,
   "reviews": [
+    {
+      "date": "2026-06-03",
+      "timestamp": "1780522372.560249",
+      "reviewer_name": "Consumer",
+      "star_rating": 5,
+      "title": "Mealtimes in our house have become…",
+      "review_text": "Mealtimes in our house have become pleasurable again!\nThe pouches are delivered well packaged, ready to go straight into the fridge and freezer. Our cat loves the box they come in, as well as going mad for the wool insulation. \nMy only slight moan is that you need scissors to open the pouches, which frustrates our cat because I always forget and have to go and get them, leaving him standing there vocalising his dissatisfaction.",
+      "category": "Subscription Benefits",
+      "categories": [
+        "Subscription Benefits"
+      ]
+    },
     {
       "date": "2026-06-03",
       "timestamp": "1780504978.828349",
