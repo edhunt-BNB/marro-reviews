@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-06-02T22:18:40.931778",
-  "last_timestamp": "1780425160.277599",
-  "total_reviews": 2196,
+  "last_updated": "2026-06-03T19:43:11.832419",
+  "last_timestamp": "1780504978.828349",
+  "total_reviews": 2198,
   "reviews": [
+    {
+      "date": "2026-06-03",
+      "timestamp": "1780504978.828349",
+      "reviewer_name": "Leann",
+      "star_rating": 5,
+      "title": "Jerry and Izzy love Marro",
+      "review_text": "Jerry and Izzy love Marro, they love all the flavours and their coats are so shiny and lovely they even love the Marro Mansion!  Thank you very much, we will be back soon for more.",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
+    {
+      "date": "2026-06-03",
+      "timestamp": "1780503324.747229",
+      "reviewer_name": "Chris",
+      "star_rating": 5,
+      "title": "Exceptional food that my cat loves",
+      "review_text": "Exceptional food that my cat loves, alongside Katkin - but I also want to give a huge shout out to the wonderful Georgia, who's always so very helpful, kind and caring with her responses. Nothing is too much trouble for her. The only downside is DPD, they're not the best for a smooth delivery sadly, however, I'm not going to deduct a star for this, because that would be unfair on Marro. Sometimes companies have to use certain couriers which allows them to keep the costs down for customers.",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-06-02",
       "timestamp": "1780425160.277599",
