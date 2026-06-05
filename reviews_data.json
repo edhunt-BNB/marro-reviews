@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-06-05T12:32:03.215729",
-  "last_timestamp": "1780661956.636959",
-  "total_reviews": 2201,
+  "last_updated": "2026-06-05T16:26:48.857455",
+  "last_timestamp": "1780673764.869089",
+  "total_reviews": 2202,
   "reviews": [
+    {
+      "date": "2026-06-05",
+      "timestamp": "1780673764.869089",
+      "reviewer_name": "Donna Gibbs",
+      "star_rating": 5,
+      "title": "It just is no trouble to feed my cats…",
+      "review_text": "It just is no trouble to feed my cats this food\nIt arrives on my doorstep and goes in the freezer. I take out a batch every couple of days and they gobble it up.\nEasy",
+      "category": "Subscription Benefits",
+      "categories": [
+        "Subscription Benefits"
+      ]
+    },
     {
       "date": "2026-06-05",
       "timestamp": "1780661956.636959",
