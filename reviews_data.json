@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-06-06T11:25:23.094912",
-  "last_timestamp": "1780740209.458829",
-  "total_reviews": 2214,
+  "last_updated": "2026-06-06T15:07:56.409405",
+  "last_timestamp": "1780752052.862109",
+  "total_reviews": 2215,
   "reviews": [
+    {
+      "date": "2026-06-06",
+      "timestamp": "1780752052.862109",
+      "reviewer_name": "Consumer",
+      "star_rating": 5,
+      "title": "wsusan3161",
+      "review_text": "Brilliant company to deal with and my cats love the food. One of my greedy cats has lost weight and no longer plagues me for food constantly. Empty bowls every time. Fantastic.",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
     {
       "date": "2026-06-06",
       "timestamp": "1780738003.947479",
