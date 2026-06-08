@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-06-08T14:01:22.176577",
-  "last_timestamp": "1780919495.637149",
-  "total_reviews": 2236,
+  "last_updated": "2026-06-08T21:45:41.968118",
+  "last_timestamp": "1780954098.954719",
+  "total_reviews": 2238,
   "reviews": [
+    {
+      "date": "2026-06-08",
+      "timestamp": "1780948118.847259",
+      "reviewer_name": "Clare Barnett",
+      "star_rating": 5,
+      "title": "Lovely company",
+      "review_text": "Company are very easy to deal with (amending amounts, dates etc); bowl is always empty and our one remaining cat demands her dinner very vocally!",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
+    {
+      "date": "2026-06-08",
+      "timestamp": "1780946581.524209",
+      "reviewer_name": "Dave Lynex",
+      "star_rating": 5,
+      "title": "great help and communication",
+      "review_text": "great help and communication",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-06-08",
       "timestamp": "1780919129.386649",
