@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-06-09T19:59:15.399635",
-  "last_timestamp": "1781028842.279119",
-  "total_reviews": 2240,
+  "last_updated": "2026-06-10T02:45:20.123632",
+  "last_timestamp": "1781057403.722349",
+  "total_reviews": 2241,
   "reviews": [
+    {
+      "date": "2026-06-10",
+      "timestamp": "1781057403.722349",
+      "reviewer_name": "Susan Gaye",
+      "star_rating": 5,
+      "title": "My cat loves this food",
+      "review_text": "My cat loves this food, and we’ve tried lots over the years.\nShe is satisfied and doesn’t seem hungry all the time. \nAnd a bonus point her poop doesn’t smell as bad as when she was eating commercial cat food. I’m delighted with marro.",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
     {
       "date": "2026-06-09",
       "timestamp": "1781017021.954939",
