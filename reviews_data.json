@@ -1,8 +1,44 @@
 {
-  "last_updated": "2026-06-11T13:53:42.968490",
-  "last_timestamp": "1781184641.873109",
-  "total_reviews": 2256,
+  "last_updated": "2026-06-11T17:33:08.963778",
+  "last_timestamp": "1781195869.836739",
+  "total_reviews": 2259,
   "reviews": [
+    {
+      "date": "2026-06-11",
+      "timestamp": "1781195869.836739",
+      "reviewer_name": "LYNNE BORRICK",
+      "star_rating": 5,
+      "title": "Excellent food for my cat",
+      "review_text": "Excellent food for my cat, Alvin loves it, good quality and just the right portions.",
+      "category": "High Quality Ingredients/Product",
+      "categories": [
+        "High Quality Ingredients/Product"
+      ]
+    },
+    {
+      "date": "2026-06-11",
+      "timestamp": "1781189513.993559",
+      "reviewer_name": "customer",
+      "star_rating": 5,
+      "title": "I ordered a trial box from Marro for my…",
+      "review_text": "I ordered a trial box from Marro for my cat, Cleo, who is an incredibly fussy eater. Unfortunately, he didn’t take to the food, but I want to make it very clear that this was absolutely no reflection on the quality of the product. The recipes looked fantastic. In all honesty, the food looked so good that I joked I would happily eat it myself! The ingredients appeared high quality, everything arrived as expected, and the ordering process was simple and straightforward. I’m genuinely disappointed it didn’t work out because I was very impressed with what Marro offers. Cleo is not a food-motivated cat and is notoriously difficult when it comes to trying anything new, so I wasn’t entirely surprised. If you have a cat who is more adventurous with food than mine, I think it’s definitely worth trying. I also want to give a special mention to Georgia from Customer Services. After realizing that I had forgotten to cancel my subscription, I discovered I had missed the order cut-off while I was away on holiday. I contacted Marro as soon as I noticed, and although I completely understood that the timing was my mistake and that changes are difficult once an order has entered the fulfilment process, Georgia was incredibly kind, understanding, and helpful. She took the time to look into the situation, explained the process clearly, and even reached out internally to see whether anything could be done. While she couldn’t guarantee the order could be stopped, she very generously offered and processed a refund because she understood that the food would likely go unused. I never felt pressured or judged; she simply wanted to help find the best outcome.That level of customer service is rare and deserves recognition. Although Marro wasn’t the right fit for Cleo, I was genuinely impressed by both the quality of the food and the care shown by the team. I would certainly consider trying Marro again in the future, whether with another cat or if Cleo ever becomes a little less picky. Thank you, Georgia, and the Marro team, for your excellent customer service and support.\nCorina",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
+    {
+      "date": "2026-06-11",
+      "timestamp": "1781188484.198699",
+      "reviewer_name": "C Adams",
+      "star_rating": 5,
+      "title": "Good food",
+      "review_text": "Good food, my cats love it. Doesn't stink like other cat foods. Cats are happy and healthy. Not the cheapest but you get what you pay for.",
+      "category": "High Quality Ingredients/Product",
+      "categories": [
+        "High Quality Ingredients/Product"
+      ]
+    },
     {
       "date": "2026-06-11",
       "timestamp": "1781174412.002939",
