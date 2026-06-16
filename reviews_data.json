@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-06-15T22:12:03.277807",
-  "last_timestamp": "1781559781.640299",
-  "total_reviews": 2292,
+  "last_updated": "2026-06-16T03:25:52.043931",
+  "last_timestamp": "1781568844.201119",
+  "total_reviews": 2294,
   "reviews": [
+    {
+      "date": "2026-06-16",
+      "timestamp": "1781568844.201119",
+      "reviewer_name": "Tessa Aston",
+      "star_rating": 5,
+      "title": "Shiny coats and purrs",
+      "review_text": "Shiny coats, happy purrs, clean bowls.  Two seniors who are picky, fussy eaters enjoying their meals.  One happy cat guardian who doesn’t have to search for nourishing food.  Lovely! :heart_eyes_cat:",
+      "category": "Fussy Cats",
+      "categories": [
+        "Fussy Cats"
+      ]
+    },
+    {
+      "date": "2026-06-15",
+      "timestamp": "1781561950.826249",
+      "reviewer_name": "Heli Korte",
+      "star_rating": 5,
+      "title": "Our two cats love Marro",
+      "review_text": "Our two cats love Marro food. After swapping to Marro we noticed differences in their energy in few days. They just seem happier :kissing_cat:\nIt took them couple of days to get used to it, but after that choice was clear.\n\nIt’s great to have portions tailored to each cat and to choose their favourite flavours.\nWe warmly recommend Marro :kissing_cat:",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
     {
       "date": "2026-06-15",
       "timestamp": "1781551985.604849",
