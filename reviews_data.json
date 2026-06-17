@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-06-17T16:51:24.523802",
-  "last_timestamp": "1781711219.107419",
-  "total_reviews": 2296,
+  "last_updated": "2026-06-17T20:04:20.992696",
+  "last_timestamp": "1781723784.735519",
+  "total_reviews": 2297,
   "reviews": [
+    {
+      "date": "2026-06-17",
+      "timestamp": "1781723784.735519",
+      "reviewer_name": "Customer",
+      "star_rating": 5,
+      "title": "It’s always a pleasure to speak with…",
+      "review_text": "It’s always a pleasure to speak with Marro customer service, so friendly and helpful :hearts:",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-06-16",
       "timestamp": "1781604313.780399",
