@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-07-03T13:48:31.754826",
-  "last_timestamp": "1783085026.039049",
-  "total_reviews": 2376,
+  "last_updated": "2026-07-03T22:56:17.829647",
+  "last_timestamp": "1783114495.004659",
+  "total_reviews": 2377,
   "reviews": [
+    {
+      "date": "2026-07-03",
+      "timestamp": "1783114495.004659",
+      "reviewer_name": "Rosemary Kerr",
+      "star_rating": 5,
+      "title": "Edward is enjoying his meals from the…",
+      "review_text": "Edward is enjoying his meals from the first teaspoon! Plate cleaned every time. Food looks and smells like quality ingredients. Website easy to navigate. Changes easily made. Product arrived very cold and was well packaged! Delivery was on time.",
+      "category": "High Quality Ingredients/Product",
+      "categories": [
+        "High Quality Ingredients/Product"
+      ]
+    },
     {
       "date": "2026-07-03",
       "timestamp": "1783085026.039049",
