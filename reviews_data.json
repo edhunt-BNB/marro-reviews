@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-07-04T13:07:34.046977",
-  "last_timestamp": "1783164751.146119",
-  "total_reviews": 2377,
+  "last_updated": "2026-07-06T13:39:17.844516",
+  "last_timestamp": "1783340756.734609",
+  "total_reviews": 2378,
   "reviews": [
+    {
+      "date": "2026-07-06",
+      "timestamp": "1783340756.734609",
+      "reviewer_name": "Louise Simpson",
+      "star_rating": 5,
+      "title": "We are big fans of Marro",
+      "review_text": "We are big fans of Marro! Our fussy 12yo boy Trunks loves Marro food which is a big thing in our household. The products are high quality and the overall service and packaging of orders are always spot on. It's a fab company and I would recommend them to any cat owners!",
+      "category": "Fussy Cats",
+      "categories": [
+        "Fussy Cats"
+      ]
+    },
     {
       "date": "2026-07-03",
       "timestamp": "1783114495.004659",
