@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-07-18T16:48:49.944406",
-  "last_timestamp": "1784389012.720009",
-  "total_reviews": 2385,
+  "last_updated": "2026-07-18T18:52:54.582266",
+  "last_timestamp": "1784396157.493959",
+  "total_reviews": 2387,
   "reviews": [
+    {
+      "date": "2026-07-18",
+      "timestamp": "1784396157.493959",
+      "reviewer_name": "customer",
+      "star_rating": 5,
+      "title": "Fantastic customer service!",
+      "review_text": "Fantastic customer service!\nMy cat had suddenly stopped eating one particular variety &amp; after contacting Marro to see if there had been a problem with this variety they held a thorough investigation into their manufacturing process to see if there were any issues at their end, keeping me informed throughout with regular updates. So good that they treated this with seriousness &amp; professionalism. \nI would highly recommend Marro anyway, as my cat enjoys his food and has no issue with all other meals in his selection, but this level of service is going above &amp; beyond expectations. Well done Marro\n☆☆☆☆☆",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "timestamp": "1784393687.727019",
+      "reviewer_name": "Phoebe Brassington",
+      "star_rating": 5,
+      "title": "Really helpful and supportive",
+      "review_text": "Really helpful and supportive interaction with Tashreeq, helped me with updates on my inquiry and explained things to me.",
+      "category": "Customer Service",
+      "categories": [
+        "Customer Service"
+      ]
+    },
     {
       "date": "2026-07-18",
       "timestamp": "1784389012.720009",
