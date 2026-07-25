@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-07-25T11:03:37.074299",
-  "last_timestamp": "1784975927.017859",
-  "total_reviews": 2443,
+  "last_updated": "2026-07-25T18:57:10.063550",
+  "last_timestamp": "1785004972.739789",
+  "total_reviews": 2444,
   "reviews": [
+    {
+      "date": "2026-07-25",
+      "timestamp": "1785004972.739789",
+      "reviewer_name": "Roberta Bombelli",
+      "star_rating": 5,
+      "title": "Great product and customer service",
+      "review_text": "I like the fact that the ingredients used are quality. The food comes in well packaged and it's easy to make an order. It arrives on time according to schedule and you get a reminder before your next order is packed in case you need to make changes.",
+      "category": "High Quality Ingredients/Product",
+      "categories": [
+        "High Quality Ingredients/Product"
+      ]
+    },
     {
       "date": "2026-07-25",
       "timestamp": "1784937743.342479",
