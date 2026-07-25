@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-07-24T22:55:35.307945",
-  "last_timestamp": "1784931548.375929",
-  "total_reviews": 2442,
+  "last_updated": "2026-07-25T02:01:05.022061",
+  "last_timestamp": "1784937743.342479",
+  "total_reviews": 2443,
   "reviews": [
+    {
+      "date": "2026-07-25",
+      "timestamp": "1784937743.342479",
+      "reviewer_name": "Karen",
+      "star_rating": 5,
+      "title": "My beautiful girly cat",
+      "review_text": "Ever since I started giving marro food my cat is so happy she eats every portion ,when she was on whiskers she was always sick and had diarrhea, then I read up what's in marro food ,I was delighted to read its raw meat with no bad ingredients, she certainly a happy cat now and so are we,thanks marro.",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
     {
       "date": "2026-07-24",
       "timestamp": "1784931548.375929",
