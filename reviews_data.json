@@ -1,8 +1,32 @@
 {
-  "last_updated": "2026-08-04T19:21:18.616400",
-  "last_timestamp": "1785865274.902569",
-  "total_reviews": 2491,
+  "last_updated": "2026-08-05T19:19:08.962772",
+  "last_timestamp": "1785956977.333979",
+  "total_reviews": 2493,
   "reviews": [
+    {
+      "date": "2026-08-05",
+      "timestamp": "1785956977.333979",
+      "reviewer_name": "Michael Fahy",
+      "star_rating": 5,
+      "title": "Healthy happy kitten",
+      "review_text": "I accidentally signed up for a subscription, it ended up being a godsend as I’d run out that morning and a nice big box arrived shortly after. My 5 month old kitten loves it, he quickly clears his bowl and he’s in excellent shape. I won’t be feeding him anything else from here on in",
+      "category": "Subscription Benefits",
+      "categories": [
+        "Subscription Benefits"
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "timestamp": "1785952950.682269",
+      "reviewer_name": "Lisa Smith",
+      "star_rating": 5,
+      "title": "I made the switch to Marro for my old boy…",
+      "review_text": "I made the switch to Marro for my elderly cat a few months ago and I’ve seen a noticeable difference with his coat, digestion and mood, for the better, I am happy to say! It is pricey, but he eats far less than with other brands because it’s quality food without all the nasties in it. The service and delivery, which you can personalise and then amend at any time is a huge bonus given my boy will adore something one week and then be completely off that particular dish the next! I would definitely recommend Marro if you have a fussy feline like mine.",
+      "category": "Changed My Cat's Life / Health Benefits",
+      "categories": [
+        "Changed My Cat's Life / Health Benefits"
+      ]
+    },
     {
       "date": "2026-08-04",
       "timestamp": "1785865274.902569",
