@@ -1,8 +1,20 @@
 {
-  "last_updated": "2026-08-16T22:12:38.939784",
-  "last_timestamp": "1786917664.433929",
-  "total_reviews": 2543,
+  "last_updated": "2026-08-17T00:51:08.742990",
+  "last_timestamp": "1786926262.732339",
+  "total_reviews": 2544,
   "reviews": [
+    {
+      "date": "2026-08-17",
+      "timestamp": "1786926262.732339",
+      "reviewer_name": "andyhowdog",
+      "star_rating": 5,
+      "title": "Reliable and friendly delivery service…",
+      "review_text": "Reliable and friendly delivery service and kept informed on delivery dates and times.",
+      "category": "Subscription Benefits",
+      "categories": [
+        "Subscription Benefits"
+      ]
+    },
     {
       "date": "2026-08-16",
       "timestamp": "1786917664.433929",
